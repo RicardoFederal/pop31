@@ -1,0 +1,15 @@
+*** Manual de Uso ***
+
+1. Escolha o tipo de situacao, de acordo com as descritas no POP 31;
+
+2. Situacao A.3 e A.4 ainda esta em debate devido a questoes de revelia, por isso esta desabilitado no sistema ate haver padrao nos documentos a serem gerados;
+
+3. Apos escolher a situacao (A1, A2, B1, B2, B3 ou B4), preencha os campos necessarios aos documentos;
+
+4. Assim que forem preenchidos os campos, clique no botao "gerar", e uma nova aba sera aberta com os documentos preenchidos e pronto para a impressao;
+
+5. Para realizar a impressao, aperte o botao " i " pequeno, acima do Brasao da Republica, no primeiro documento.
+
+<<Fim>>
+
+* Uma copia do manual de uso se encontra na pasta de instalacao do programa.

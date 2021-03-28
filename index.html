@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador POP 31</title>
+    <style type="text/css">
+
+
+     .container{
+         background-color: #ccc;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+     
+     }
+     .container div{
+         background-color: #ccc;
+         margin: 1px;
+         padding: 1px;
+         width: 360px;
+     }
+
+     .container2{
+         background-color: #ccc;
+         display: none;
+     }
+     
+
+     .row{
+         padding: 1px;
+         display: inline-flex;  
+
+     }
+
+     .btn{
+         width: 351px;
+         text-align: left;
+         border: 1px solid black;
+     }
+
+     .btn:hover{
+         background-color: rgb(146, 238, 146)!important;
+     }
+
+     #btnA3{
+         background-color: red;
+         color: white;
+     }
+
+     #btnA4{
+         background-color: red;
+         color: white;
+     }
+
+     #btnA3:hover{
+         background-color: red  !important;;
+     }
+
+     #btnA4:hover{
+         background-color: red  !important;;
+     }
+
+     .txEsq {
+        float: left;
+       padding: 0px;
+    }
+
+    .tx{
+        float: right;
+        padding: 0px;
+       
+    }
+
+    .txlarg {
+        width: 347px;
+    }
+
+    .txnovo {
+        width: 290px;
+    }
+
+    p {text-indent: 5em; text-align: justify;}
+
+    #conteudo{
+        margin-left: 50px;
+        margin-right: 30px;
+        margin-top: 50px;
+    }
+
+    img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+    }
+
+    .limpar{
+        float: left;
+        background-color: rgb(240, 179, 179);
+        border: none;
+    }
+
+    .gerar{
+        float: right;
+        width: 150px;
+        background-color: rgb(146, 238, 146);
+    }
+
+    #nAI{
+        margin-top: 8px;
+    }
+
+    #nSF{
+        margin-top: 8px; 
+    }
+
+    #cidade{
+        margin-top: 8px; 
+    }
+
+    #funcGestor{
+        margin-top: 8px; 
+    }
+
+    #ofiCreadoc{
+        margin-top: 8px; 
+    }
+
+    #gerar{
+        margin-top: 13px; 
+    }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div> <input type="button" id="btnA1" tabindex="-1" class = "btn" value="A.1 - Pagou a multa e regularizou a situação" onclick="fun1()"> </div>
+        <div> <input type="button" id="btnA2" tabindex="-1" class = "btn" value="A.2 - Pagou a multa mas não regularizou a situação" onclick="fun2()"> </div>
+        <div> <input type="button" id="btnA3" tabindex="-1" class = "btn" value="A.3 - Não pagou a multa, mas regularizou a situação" onclick="mudaCor3()"> </div>
+        <div> <input type="button" id="btnA4" tabindex="-1" class = "btn" value="A.4 - Não pagou a multa e não regularizou a situação" onclick="mudaCor4()"> </div>
+        <div> <input type="button" id="btnA5" tabindex="-1" class = "btn" value="B.1 - Pagou a multa e regularizou a situação" onclick="fun5()"> </div>
+        <div> <input type="button" id="btnA6" tabindex="-1" class = "btn" value="B.2 - Pagou a multa mas não regularizou a situação" onclick="fun6()"> </div>
+        <div> <input type="button" id="btnA7" tabindex="-1" class = "btn" value="B.3 - Não pagou a multa, mas regularizou a situação" onclick="fun7()"> </div>
+        <div> <input type="button" id="btnA8" tabindex="-1" class = "btn" value="B.4 - Não pagou a multa e não regularizou a situação" onclick="fun8()"> </div>
+    </div>
+
+    <div id="dividi" class="container2">
+        <center>
+        <div class="row"><input type="text" tabindex="1" class ="txnovo" id="nSF" placeholder="nº SF/ano" style="display:none"></div>
+        <div class="row"><input type="button" tabindex="-1" class="limpar" id="limpar" value="Limpar" style="display:none" onclick="reset()"></div></br>
+        <div class="row"><input type="text" tabindex="2" class ="txlarg" id="interr" placeholder="Interessado" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="3" class ="txlarg" id="infr" placeholder="informar a infração" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="4" class ="txEsq" id="nAI" placeholder="nº AI - mod xxxx/aaaa" style="display:none"></div>
+        <div class="row"><input type="text" tabindex="5" class ="tx" id="flsAI" placeholder="folha do AI" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="6" class ="txlarg" id="prazo" placeholder="tendo decorrido em dd/mm/aaaa o respectivo prazo legal" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="7" class ="txlarg" id="extrato" placeholder="extratos do sistema às fls. (inserir nº folhas)" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="8" class ="tx" id="dtPagMult" placeholder="informar fl. pagamento multa" style="display:none"></div>
+        <div class="row"><input type="text" tabindex="9" class ="tx" id="tranJulg" placeholder="data que transitou julgado" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="10" class ="txlarg" id="cidade" placeholder="cidade, dd/mm/aaaa" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="11" class ="txlarg" id="func" placeholder="nome do funcionário" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="12" class ="txEsq" id="cargo" placeholder="cargo" style="display:none"></div>
+        <div class="row"><input type="text" tabindex="13" class ="tx" id="reg" placeholder="nº registro" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="14" class ="txlarg" id="unid" placeholder="unidade" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="15" class ="txlarg" id="funcGestor" placeholder="nome do gestor" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="16" class ="txEsq" id="cargoGestor" placeholder="cargo do gestor" style="display:none"></div>
+        <div class="row"><input type="text" tabindex="17" class ="tx" id="regGestor" placeholder="nº registro do gestor" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="18" class ="txlarg" id="unidGestor" placeholder="unidade do gestor" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="19" class ="tx" id="ofiCreadoc" placeholder="nº do Ofício (Creadoc)" style="display:none"></div>
+        <div class="row"><input type="text" tabindex="20" class ="tx" id="iniciais" placeholder="iniciais do funcionário" style="display:none"></div></br>
+        <div class="row"><input type="text" tabindex="21" class ="tx" id="dataAI" placeholder="data do AI" style="display:none"></div>
+        <div class="row"><input type="text" tabindex="22" class ="tx" id="flsDef" placeholder="folhas da defesa" style="display:none"></div>
+        <div class="row"><input type="text" tabindex="23" class ="tx" id="flsInform" placeholder="folha da informação" style="display:none"></div>
+        <div class="row"><input type="text" tabindex="24" class ="tx" id="camara" placeholder="camara" style="display:none"></div><br>
+        <div class="row"><input type="button" tabindex="25" class="gerar" id="gerar" value="Gerar" style="display:none" ></div>
+        
+        </center>
+    </div>
+    
+    <h6 style="text-align: center; font-weight: normal; font-style: italic;">Desenvolvido por Ricardo.mv</h6>
+    
+
+    <div id="imprimirDiv" style="display:none">
+        <center><input type="button" style="border: none;" class="btnnoprint" name="imprimir" value="i" onclick="window.print();"></center>
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 03</h3>
+        
+        <br>Processo SF – <span id="nSFspan"></span>
+        <br>Interessado: <span id="interrspan"></span>
+        <br>Assunto: <span id="infrspan"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">INFORMAÇÃO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo que, até esta data, 
+            não foi apresentada defesa contra o Auto de Infração lavrado sob nº <span id="nAIspan"></span>, 
+            anexado às fls. <span id="flsAIspan"></span>, tendo decorrido em <span id="prazospan"></span> o respectivo prazo legal 
+            para o interessado.</P>
+
+        <p><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo, ainda, que foi verificado que o autuado efetuou o pagamento da multa 
+            imposta e regularizou a situação que ensejou a lavratura do aludido Auto, 
+            conforme extratos do sistema às fls. <span id="extratospan"></span>.</p>
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcspan"></span><br>
+        <span id="cargospan"></span> – Registro <span id="regspan"></span><br>
+        <span id="unidspan"></span>
+        </h4>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 04</h3>
+        
+        <br>Processo SF – <span id="nSFspan2"></span>
+        <br>Interessado: <span id="interrspan2"></span>
+        <br>Assunto: <span id="infrspan2"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">DECLARAÇÃO DE TRÂNSITO EM JULGADO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Declaramos que, considerando o pagamento da multa referente ao Auto de Infração nº <span id="nAIspan2"></span>, conforme informação de fls. <span id="dtPagMultspan"></span>, o presente processo transitou em julgado administrativamente em <span id="tranJulgspan"></span>.</P>
+
+        
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan2"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcGestorspan"></span><br>
+        <span id="cargoGestorspan"></span> – Registro <span id="regGestorspan"></span><br>
+        <span id="unidGestorspan"></span>
+        </h4>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 05</h3>
+        
+        <br>Processo SF – <span id="nSFspan3"></span>
+        <br>Interessado: <span id="interrspan3"></span>
+        <br>Assunto: <span id="infrspan3"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">DESPACHO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Considerando o pagamento da multa e a regularização da situação 
+            que ensejou a autuação, determino:</P>
+
+        <p>1. Oficiar o interessado comunicando o trânsito em julgado, ressaltando que, no caso de nova infração 
+            capitulada no mesmo dispositivo legal, será considerada reincidente;</p>
+        <p>2. Encerrar o processo no SIPRO e arquivar.</p>
+
+        
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan3"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcGestorspan2"></span><br>
+        <span id="cargoGestorspan2"></span> – Registro <span id="regGestorspan2"></span><br>
+        <span id="unidGestorspan2"></span>
+        </h4>
+
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 06</h3>
+        
+        <br>Ofício nº <span id="ofiCreadocspan"></span> - <span id="unidspan2"></span>
+        <br><span id="iniciaisspan" style="font-size: small;"></span>
+        <br><h4 style="text-align:right"><span id="cidadespan4"></span></h4>
+        <br>
+        <br>
+        <br>Processo SF nº <span id="nSFspan4"></span>
+        <br>Auto de infração nº <span id="nAIspan3"></span>
+
+        <br>
+        <br>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Senhor(es),</P>
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Aos Conselhos Regionais de Engenharia e Agronomia, instituídos 
+            pelo Decreto Federal nº 23.569, de 11 de dezembro de 1933, e mantidos pela Lei Federal nº 5.194, de 24 de dezembro de 1966, 
+            compete orientar e fiscalizar o exercício das profissões do engenheiro, do agrônomo, do geólogo, do meteorologista, 
+            do geógrafo e do tecnólogo, com o fim de salvaguardar a sociedade.</P>
+
+        <P>2.<span style="color: #ffffff; opacity: 0;">11111111111</span>Informamos que o pagamento da multa referente ao Auto de 
+            Infração em epígrafe foi identificado em nossos sistemas, tendo o presente processo transitado em julgado 
+            administrativamente em <span id="tranJulgspan2"></span>.</P>
+        
+        <P>3.<span style="color: #ffffff; opacity: 0;">11111111111</span>Comunicamos, ainda, que, de acordo com disposto no 
+            artigo 38 da Resolução nº 1.008/2004, do CONFEA, caso Vossa Senhoria (ou essa empresa) venha a praticar nova infração 
+            capitulada no mesmo dispositivo legal será considerada reincidente.</P>
+        <br>
+
+        <h4 style="text-align:center">Atenciosamente.
+        <br>
+        <br>
+
+        
+    
+        <br>______________________________________<br>
+        <span id="funcGestorspan3"></span><br>
+        <span id="cargoGestorspan3"></span> – Registro <span id="regGestorspan3"></span><br>
+        <span id="unidGestorspan3"></span>
+        </h4>
+
+
+
+
+
+
+
+    </div>
+
+
+    <div id="imprimirDiv2" style="display:none">
+        <center><input type="button" style="border: none;" class="btnnoprint" name="imprimir" value="i" onclick="window.print();"></center>
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 03</h3>
+        
+        <br>Processo SF – <span id="nSFspan102"></span>
+        <br>Interessado: <span id="interrspan102"></span>
+        <br>Assunto: <span id="infrspan102"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">INFORMAÇÃO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo que, até esta data, 
+            não foi apresentada defesa contra o Auto de Infração lavrado sob nº <span id="nAIspan102"></span>, 
+            anexado às fls. <span id="flsAIspan102"></span>, tendo decorrido em <span id="prazospan102"></span> o respectivo prazo legal 
+            para o interessado.</P>
+
+        <p><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo, ainda, que foi verificado que o autuado efetuou o pagamento da multa 
+            imposta e não regularizou a situação que ensejou a lavratura do aludido Auto, 
+            conforme extratos do sistema às fls. <span id="extratospan102"></span>.</p>
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan102"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcspan102"></span><br>
+        <span id="cargospan102"></span> – Registro <span id="regspan102"></span><br>
+        <span id="unidspan102"></span>
+        </h4>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 04</h3>
+        
+        <br>Processo SF – <span id="nSFspan1022"></span>
+        <br>Interessado: <span id="interrspan1022"></span>
+        <br>Assunto: <span id="infrspan1022"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">DECLARAÇÃO DE TRÂNSITO EM JULGADO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Declaramos que, considerando o pagamento da multa 
+            referente ao Auto de Infração nº <span id="nAIspan1022"></span>, conforme informação 
+            de fls. <span id="dtPagMultspan102"></span>, o presente processo transitou em julgado 
+            administrativamente em <span id="tranJulgspan102"></span>.</P>
+
+        
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan1022"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcGestorspan102"></span><br>
+        <span id="cargoGestorspan102"></span> – Registro <span id="regGestorspan102"></span><br>
+        <span id="unidGestorspan102"></span>
+        </h4>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 05</h3>
+        
+        <br>Processo SF – <span id="nSFspan1023"></span>
+        <br>Interessado: <span id="interrspan1023"></span>
+        <br>Assunto: <span id="infrspan1023"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">DESPACHO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Considerando o pagamento da multa e a regularização da situação 
+            que ensejou a autuação, determino:</P>
+
+        <p>1. Oficiar o interessado comunicando o trânsito em julgado, ressaltando que, apesar do pagamento da multa, não houve a regularização da situação, estando sujeita a nova autuação por reincidência/nova reincidência;</p>
+        <p>2. Extrair as devidas cópias do processo de incidência/reincidência 
+            (AI, extrato de pagamento da multa, declaração de trânsito em julgado e ofício) para apuração e 
+            novo relatório de fiscalização que constate o fato, reiniciando os procedimentos a partir do art. 
+            5º da Resolução nº 1.008, de 9 de dezembro de 2004, do CONFEA;</p>
+        <p>3. Encerrar o processo no SIPRO e arquivar.</p>
+
+        
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan1023"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcGestorspan1022"></span><br>
+        <span id="cargoGestorspan1022"></span> – Registro <span id="regGestorspan1022"></span><br>
+        <span id="unidGestorspan1022"></span>
+        </h4>
+
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 06</h3>
+        
+        <br>Ofício nº <span id="ofiCreadocspan102"></span> - <span id="unidspan1022"></span>
+        <br><span id="iniciaisspan102" style="font-size: small;"></span>
+        <br><h4 style="text-align:right"><span id="cidadespan1024"></span></h4>
+        <br>
+        <br>
+        <br>Processo SF nº <span id="nSFspan1024"></span>
+        <br>Auto de infração nº <span id="nAIspan1023"></span>
+
+        <br>
+        <br>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Senhor(es),</P>
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Aos Conselhos Regionais de Engenharia e Agronomia, instituídos 
+            pelo Decreto Federal nº 23.569, de 11 de dezembro de 1933, e mantidos pela Lei Federal nº 5.194, de 24 de dezembro de 1966, 
+            compete orientar e fiscalizar o exercício das profissões do engenheiro, do agrônomo, do geólogo, do meteorologista, 
+            do geógrafo e do tecnólogo, com o fim de salvaguardar a sociedade.</P>
+
+        <P>2.<span style="color: #ffffff; opacity: 0;">11111111111</span>Informamos que o pagamento da multa referente ao Auto de 
+            Infração em epígrafe foi identificado em nossos sistemas, tendo o presente processo transitado em julgado 
+            administrativamente em <span id="tranJulgspan1022"></span>.</P>
+        
+        <P>3.<span style="color: #ffffff; opacity: 0;">11111111111</span>Comunicamos, ainda, que, de acordo com disposto no 
+            artigo 38 da Resolução nº 1.008/2004, do CONFEA, caso Vossa Senhoria (ou essa empresa) venha a praticar nova infração 
+            capitulada no mesmo dispositivo legal será considerada reincidente.</P>
+
+        <P>4.<span style="color: #ffffff; opacity: 0;">11111111111</span>Ressaltamos que a situação ensejadora do Auto de Infração 
+            mencionado ainda não foi regularizada, e caso Vossa Senhoria (ou essa empresa) venha a praticar nova infração capitulada 
+            no mesmo dispositivo legal será considerada reincidente.</P>
+        <br>
+
+        <h4 style="text-align:center">Atenciosamente.
+       
+
+
+        
+  
+
+
+
+        <br>______________________________________<br>
+        <span id="funcGestorspan1023"></span><br>
+        <span id="cargoGestorspan1023"></span> – Registro <span id="regGestorspan1023"></span><br>
+        <span id="unidGestorspan1023"></span>
+        </h4>
+
+
+
+
+
+
+
+    </div>
+ 
+
+    <div id="imprimirDiv5" style="display:none">
+        <center><input type="button" style="border: none;" class="btnnoprint" name="imprimir" value="i" onclick="window.print();"></center>
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 08</h3>
+        
+        <br>Processo SF – <span id="nSFspan502"></span>
+        <br>Interessado: <span id="interrspan502"></span>
+        <br>Assunto: <span id="infrspan502"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">INFORMAÇÃO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo que foi apresentada defesa, 
+            juntada às fls. <span id="flsDef5span502"></span> contra o Auto de Infração de fls. <span id="flsAIspan502"></span> lavrado sob nº <span id="nAIspan502"></span> em <span id="dataAIvalor502"></span></P>
+
+        <p><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo, ainda, que foi verificado que o autuado efetuou o pagamento da multa 
+            imposta e regularizou a situação que ensejou a lavratura do aludido Auto, 
+            conforme extratos do sistema às fls. <span id="extratospan502"></span>.</p>
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan502"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcspan502"></span><br>
+        <span id="cargospan502"></span> – Registro <span id="regspan502"></span><br>
+        <span id="unidspan502"></span>
+        </h4>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 09</h3>
+        
+        <br>Processo SF – <span id="nSFspan5022"></span>
+        <br>Interessado: <span id="interrspan5022"></span>
+        <br>Assunto: <span id="infrspan5022"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">DESPACHO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Considerando a defesa apresentada pelo interessado às fls. <span id="flsDef5span5022"></span> bem como o 
+            informado às fls. <span id="flsInformspan502"></span> encaminhamos este processo à Câmara Especializada de <span id="camaravalorSpan502"></span> para análise e emissão de parecer 
+            fundamentado acerca da procedência ou não do aludido Auto, opinando sobre a sua manutenção ou cancelamento, de conformidade 
+            com o disposto nos artigos 15 e 16<sup>1</sup> da Resolução nº 1.008, de 9 de dezembro de 2004, do CONFEA.</P>
+
+        
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan5022"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcGestorspan502"></span><br>
+        <span id="cargoGestorspan502"></span> – Registro <span id="regGestorspan502"></span><br>
+        <span id="unidGestorspan502"></span>
+        </h4>
+
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+  
+        <H6 style="text-align: left; font-weight: normal; "><sup>1</sup> Art. 15. Anexada ao processo, a defesa será encaminhada 
+            à câmara especializada relacionada à atividade desenvolvida, para apreciação e julgamento. 
+            [...] Art. 16. Na câmara especializada, o processo será distribuído para conselheiro, que deve relatar 
+            o assunto de forma objetiva e legalmente fundamentada.</H6>
+
+    </div>
+
+
+    <div id="imprimirDiv6" style="display:none">
+        <center><input type="button" style="border: none;" class="btnnoprint" name="imprimir" value="i" onclick="window.print();"></center>
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 08</h3>
+        
+        <br>Processo SF – <span id="nSFspan602"></span>
+        <br>Interessado: <span id="interrspan602"></span>
+        <br>Assunto: <span id="infrspan602"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">INFORMAÇÃO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo que foi apresentada defesa, 
+            juntada às fls. <span id="flsDef5span602"></span> contra o Auto de Infração de fls. <span id="flsAIspan602"></span> lavrado sob nº <span id="nAIspan602"></span> em <span id="dataAIvalor602"></span></P>
+
+        <p><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo, ainda, que foi verificado que o autuado efetuou o pagamento da multa 
+            imposta e não regularizou a situação que ensejou a lavratura do aludido Auto, 
+            conforme extratos do sistema às fls. <span id="extratospan602"></span>.</p>
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan602"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcspan602"></span><br>
+        <span id="cargospan602"></span> – Registro <span id="regspan602"></span><br>
+        <span id="unidspan602"></span>
+        </h4>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 09</h3>
+        
+        <br>Processo SF – <span id="nSFspan6022"></span>
+        <br>Interessado: <span id="interrspan6022"></span>
+        <br>Assunto: <span id="infrspan6022"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">DESPACHO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Considerando a defesa apresentada pelo interessado às fls. <span id="flsDef5span6022"></span> bem como o 
+            informado às fls. <span id="flsInformspan602"></span> encaminhamos este processo à Câmara Especializada de <span id="camaravalorSpan602"></span> para análise e emissão de parecer 
+            fundamentado acerca da procedência ou não do aludido Auto, opinando sobre a sua manutenção ou cancelamento, de conformidade 
+            com o disposto nos artigos 15 e 16<sup>1</sup> da Resolução nº 1.008, de 9 de dezembro de 2004, do CONFEA.</P>
+
+        
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan6022"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcGestorspan602"></span><br>
+        <span id="cargoGestorspan602"></span> – Registro <span id="regGestorspan602"></span><br>
+        <span id="unidGestorspan602"></span>
+        </h4>
+
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+ 
+        <H6 style="text-align: left; font-weight: normal; "><sup>1</sup> Art. 15. Anexada ao processo, a defesa será encaminhada 
+            à câmara especializada relacionada à atividade desenvolvida, para apreciação e julgamento. 
+            [...] Art. 16. Na câmara especializada, o processo será distribuído para conselheiro, que deve relatar 
+            o assunto de forma objetiva e legalmente fundamentada.</H6>
+
+    </div>
+
+
+    <div id="imprimirDiv7" style="display:none">
+        <center><input type="button" style="border: none;" class="btnnoprint" name="imprimir" value="i" onclick="window.print();"></center>
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 08</h3>
+        
+        <br>Processo SF – <span id="nSFspan702"></span>
+        <br>Interessado: <span id="interrspan702"></span>
+        <br>Assunto: <span id="infrspan702"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">INFORMAÇÃO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo que foi apresentada defesa, 
+            juntada às fls. <span id="flsDef5span702"></span> contra o Auto de Infração de fls. <span id="flsAIspan702"></span> lavrado sob nº <span id="nAIspan702"></span> em <span id="dataAIvalor702"></span></P>
+
+        <p><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo, ainda, que foi verificado que o autuado não efetuou o pagamento da multa 
+            imposta e regularizou a situação que ensejou a lavratura do aludido Auto, 
+            conforme extratos do sistema às fls. <span id="extratospan702"></span>.</p>
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan702"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcspan702"></span><br>
+        <span id="cargospan702"></span> – Registro <span id="regspan702"></span><br>
+        <span id="unidspan702"></span>
+        </h4>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 09</h3>
+        
+        <br>Processo SF – <span id="nSFspan7022"></span>
+        <br>Interessado: <span id="interrspan7022"></span>
+        <br>Assunto: <span id="infrspan7022"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">DESPACHO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Considerando a defesa apresentada pelo interessado às fls. <span id="flsDef5span7022"></span> bem como o 
+            informado às fls. <span id="flsInformspan702"></span> encaminhamos este processo à Câmara Especializada de <span id="camaravalorSpan702"></span> para análise e emissão de parecer 
+            fundamentado acerca da procedência ou não do aludido Auto, opinando sobre a sua manutenção ou cancelamento, de conformidade 
+            com o disposto nos artigos 15 e 16<sup>1</sup> da Resolução nº 1.008, de 9 de dezembro de 2004, do CONFEA.</P>
+
+        
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan7022"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcGestorspan702"></span><br>
+        <span id="cargoGestorspan702"></span> – Registro <span id="regGestorspan702"></span><br>
+        <span id="unidGestorspan702"></span>
+        </h4>
+
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+      
+        <H6 style="text-align: left; font-weight: normal; "><sup>1</sup> Art. 15. Anexada ao processo, a defesa será encaminhada 
+            à câmara especializada relacionada à atividade desenvolvida, para apreciação e julgamento. 
+            [...] Art. 16. Na câmara especializada, o processo será distribuído para conselheiro, que deve relatar 
+            o assunto de forma objetiva e legalmente fundamentada.</H6>
+
+    </div>
+
+
+    <div id="imprimirDiv8" style="display:none">
+        <center><input type="button" style="border: none;" class="btnnoprint" name="imprimir" value="i" onclick="window.print();"></center>
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 08</h3>
+        
+        <br>Processo SF – <span id="nSFspan802"></span>
+        <br>Interessado: <span id="interrspan802"></span>
+        <br>Assunto: <span id="infrspan802"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">INFORMAÇÃO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo que foi apresentada defesa, 
+            juntada às fls. <span id="flsDef5span802"></span> contra o Auto de Infração de fls. <span id="flsAIspan802"></span> lavrado sob nº <span id="nAIspan802"></span> em <span id="dataAIvalor802"></span></P>
+
+        <p><span style="color: #ffffff; opacity: 0;">11111111111</span>Informo, ainda, que foi verificado que o autuado não efetuou o pagamento da multa 
+            imposta e não regularizou a situação que ensejou a lavratura do aludido Auto, 
+            conforme extratos do sistema às fls. <span id="extratospan802"></span>.</p>
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan802"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <br>______________________________________<br>
+        <span id="funcspan802"></span><br>
+        <span id="cargospan802"></span> – Registro <span id="regspan802"></span><br>
+        <span id="unidspan802"></span>
+        </h4>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        
+
+        <center><img src="brasao.jpg" ></center>
+        <h3 style="text-align:center; color: #ffffff; opacity: 0;">ANEXO 09</h3>
+        
+        <br>Processo SF – <span id="nSFspan8022"></span>
+        <br>Interessado: <span id="interrspan8022"></span>
+        <br>Assunto: <span id="infrspan8022"></span>
+        <br>
+        <br>
+
+        <h4 style="text-align:center">DESPACHO</h4>
+
+        <P><span style="color: #ffffff; opacity: 0;">11111111111</span>Considerando a defesa apresentada pelo interessado às fls. <span id="flsDef5span8022"></span> bem como o 
+            informado às fls. <span id="flsInformspan802"></span> encaminhamos este processo à Câmara Especializada de <span id="camaravalorSpan802"></span> para análise e emissão de parecer 
+            fundamentado acerca da procedência ou não do aludido Auto, opinando sobre a sua manutenção ou cancelamento, de conformidade 
+            com o disposto nos artigos 15 e 16<sup>1</sup> da Resolução nº 1.008, de 9 de dezembro de 2004, do CONFEA.</P>
+
+        
+        <br>
+        <br>
+        <br>
+
+        <h4 style="text-align:center"><span id="cidadespan8022"></span>.
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+                                                                <!--desenvolvido por Ricardo Meyer Viaro-->
+        <br>______________________________________<br>
+        <span id="funcGestorspan802"></span><br>
+        <span id="cargoGestorspan802"></span> – Registro <span id="regGestorspan802"></span><br>
+        <span id="unidGestorspan802"></span>
+        </h4>
+
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+        <BR>
+     
+        <H6 style="text-align: left; font-weight: normal; "><sup>1</sup> Art. 15. Anexada ao processo, a defesa será encaminhada 
+            à câmara especializada relacionada à atividade desenvolvida, para apreciação e julgamento. 
+            [...] Art. 16. Na câmara especializada, o processo será distribuído para conselheiro, que deve relatar 
+            o assunto de forma objetiva e legalmente fundamentada.</H6>
+
+    </div>
+
+
+    <script type="text/javascript">
+    
+        function fun1(){
+            
+            var nSF = document.getElementById("nSF");
+            var interr = document.getElementById("interr");
+            var infr = document.getElementById("infr");
+            var nAI = document.getElementById("nAI");
+            var flsAI = document.getElementById("flsAI");
+            var prazo = document.getElementById("prazo");
+            var extrato = document.getElementById("extrato");
+            var dtPagMult = document.getElementById("dtPagMult");
+            var tranJulg = document.getElementById("tranJulg");
+            var cidade = document.getElementById("cidade");
+            var func = document.getElementById("func");
+            var cargo = document.getElementById("cargo");
+            var reg = document.getElementById("reg");
+            var unid = document.getElementById("unid");
+            var funcGestor = document.getElementById("funcGestor");
+            var cargoGestor = document.getElementById("cargoGestor");
+            var regGestor = document.getElementById("regGestor");
+            var unidGestor = document.getElementById("unidGestor");
+            var ofiCreadoc = document.getElementById("ofiCreadoc");
+            var iniciais = document.getElementById("iniciais");
+            var limpar = document.getElementById("limpar");
+            var gerar = document.getElementById("gerar");
+            var dividi = document.getElementById("dividi");
+
+            var dataAI = document.getElementById("dataAI");
+            var flsDef = document.getElementById("flsDef");
+            var flsInform = document.getElementById("flsInform");
+            var camara = document.getElementById("camara");
+
+            dataAI.style.display = "none";
+            flsDef.style.display = "none";
+            flsInform.style.display = "none";
+            camara.style.display = "none";
+                        
+            
+            nSF.style.display = "block";
+            interr.style.display = "block";
+            infr.style.display = "block";
+            nAI.style.display = "block";
+            flsAI.style.display = "block";
+            prazo.style.display = "block";
+            extrato.style.display = "block";
+            dtPagMult.style.display = "block";
+            tranJulg.style.display = "block";
+            cidade.style.display = "block";
+            func.style.display = "block";
+            cargo.style.display = "block";
+            reg.style.display = "block";
+            unid.style.display = "block";
+            funcGestor.style.display = "block";
+            cargoGestor.style.display = "block";
+            regGestor.style.display = "block";
+            unidGestor.style.display = "block";
+            ofiCreadoc.style.display = "block";
+            iniciais.style.display = "block";
+            limpar.style.display = "block";
+            gerar.style.display = "block";
+            dividi.style.display = "block";
+        
+            
+            /* função do botão gerar */
+            var element = document.getElementById('gerar');
+            element.onclick = function () { 
+            
+            var  nSFvalor = document.getElementById('nSF').value;
+            nSFspan.innerHTML = nSFvalor;
+            nSFspan2.innerHTML = nSFvalor;
+            nSFspan3.innerHTML = nSFvalor;
+            nSFspan4.innerHTML = nSFvalor;
+
+            var  interrvalor = document.getElementById('interr').value;
+            interrspan.innerHTML = interrvalor;
+            interrspan2.innerHTML = interrvalor;
+            interrspan3.innerHTML = interrvalor;
+
+            var  infrvalor = document.getElementById('infr').value;
+            infrspan.innerHTML = infrvalor;
+            infrspan2.innerHTML = infrvalor;
+            infrspan3.innerHTML = infrvalor;
+
+            var  nAIvalor = document.getElementById('nAI').value;
+            nAIspan.innerHTML = nAIvalor;
+            nAIspan2.innerHTML = nAIvalor;
+            nAIspan3.innerHTML = nAIvalor;
+
+            var  flsAIvalor = document.getElementById('flsAI').value;
+            flsAIspan.innerHTML = flsAIvalor;
+            
+
+            var  prazovalor = document.getElementById('prazo').value;
+            prazospan.innerHTML = prazovalor;
+                        
+
+            var  extratovalor = document.getElementById('extrato').value;
+            extratospan.innerHTML = extratovalor;
+            
+
+            var  cidadevalor = document.getElementById('cidade').value;
+            cidadespan.innerHTML = cidadevalor;
+            cidadespan2.innerHTML = cidadevalor;
+            cidadespan3.innerHTML = cidadevalor;
+            cidadespan4.innerHTML = cidadevalor;
+
+            var  funcvalor = document.getElementById('func').value;
+            funcspan.innerHTML = funcvalor;
+
+            var  cargovalor = document.getElementById('cargo').value;
+            cargospan.innerHTML = cargovalor;
+
+            var  regvalor = document.getElementById('reg').value;
+            regspan.innerHTML = regvalor;
+
+            var  unidvalor = document.getElementById('unid').value;
+            unidspan.innerHTML = unidvalor;
+            unidspan2.innerHTML = unidvalor;
+
+            var  funcGestorvalor = document.getElementById('funcGestor').value;
+            funcGestorspan.innerHTML = funcGestorvalor;
+            funcGestorspan2.innerHTML = funcGestorvalor;
+            funcGestorspan3.innerHTML = funcGestorvalor;
+
+            var  cargoGestorvalor = document.getElementById('cargoGestor').value;
+            cargoGestorspan.innerHTML = cargoGestorvalor;
+            cargoGestorspan2.innerHTML = cargoGestorvalor;
+            cargoGestorspan3.innerHTML = cargoGestorvalor;
+
+            var  regGestorvalor = document.getElementById('regGestor').value;
+            regGestorspan.innerHTML = regGestorvalor;
+            regGestorspan2.innerHTML = regGestorvalor;
+            regGestorspan3.innerHTML = regGestorvalor;
+
+            var  unidGestorvalor = document.getElementById('unidGestor').value;
+            unidGestorspan.innerHTML = unidGestorvalor;
+            unidGestorspan2.innerHTML = unidGestorvalor;
+            unidGestorspan3.innerHTML = unidGestorvalor;
+
+            var  dtPagMultvalor = document.getElementById('dtPagMult').value;
+            dtPagMultspan.innerHTML = dtPagMultvalor;
+
+            var  tranJulgvalor = document.getElementById('tranJulg').value;
+            tranJulgspan.innerHTML = tranJulgvalor;
+            tranJulgspan2.innerHTML = tranJulgvalor;
+
+            var  ofiCreadocvalor = document.getElementById('ofiCreadoc').value;
+            ofiCreadocspan.innerHTML = ofiCreadocvalor;
+            
+            var  iniciaisvalor = document.getElementById('iniciais').value;
+            iniciaisspan.innerHTML = iniciaisvalor;
+
+            printDiv();
+            
+            };
+
+            mudaCor1();
+           
+        }
+        
+        function reset(){
+                document.getElementById("nSF").value='';
+                document.getElementById("interr").value='';
+                document.getElementById("infr").value='';
+                document.getElementById("nAI").value='';
+                document.getElementById("flsAI").value='';
+                document.getElementById("prazo").value='';
+                document.getElementById("extrato").value='';
+                document.getElementById("dtPagMult").value='';
+                document.getElementById("tranJulg").value='';
+                document.getElementById("cidade").value='';
+                document.getElementById("func").value='';
+                document.getElementById("cargo").value='';
+                document.getElementById("reg").value='';
+                document.getElementById("unid").value='';
+                document.getElementById("funcGestor").value='';
+                document.getElementById("cargoGestor").value='';
+                document.getElementById("regGestor").value='';
+                document.getElementById("unidGestor").value='';
+                document.getElementById("ofiCreadoc").value='';
+                document.getElementById("iniciais").value='';
+                document.getElementById("dataAI").value='';
+                document.getElementById("flsDef").value='';
+                document.getElementById("flsInform").value='';
+                document.getElementById("camara").value='';
+
+
+            }
+
+        function printDiv(){
+
+            var divElements = document.getElementById('imprimirDiv').innerHTML;
+            var win = window.open("", "A1", "height=1122,width=793");
+            win.document.write(divElements);
+        }
+
+        function printDiv2(){
+
+        var divElements2 = document.getElementById('imprimirDiv2').innerHTML;
+        var win2 = window.open("", "A2", "height=1122,width=793");
+        win2.document.write(divElements2);
+        }      
+        
+        function printDiv5(){
+
+        var divElements5 = document.getElementById('imprimirDiv5').innerHTML;
+        var win5 = window.open("", "B1", "height=1122,width=793");
+        win5.document.write(divElements5);
+        }  
+
+        function printDiv6(){
+
+        var divElements6 = document.getElementById('imprimirDiv6').innerHTML;
+        var win6 = window.open("", "B2", "height=1122,width=793");
+        win6.document.write(divElements6);
+        }
+
+        function printDiv7(){
+
+        var divElements7 = document.getElementById('imprimirDiv7').innerHTML;
+        var win7 = window.open("", "B3", "height=1122,width=793");
+        win7.document.write(divElements7);
+        }
+
+        function printDiv8(){
+
+        var divElements8 = document.getElementById('imprimirDiv8').innerHTML;
+        var win8 = window.open("", "B4", "height=1122,width=793");
+        win8.document.write(divElements8);
+        }
+
+        function mudaCor1(){
+            var cor1 = document.getElementById('btnA1');
+            var cor2 = document.getElementById('btnA2');
+            var cor3 = document.getElementById('btnA3');
+            var cor4 = document.getElementById('btnA4');
+            var cor5 = document.getElementById('btnA5');
+            var cor6 = document.getElementById('btnA6');
+            var cor7 = document.getElementById('btnA7');
+            var cor8 = document.getElementById('btnA8');
+            cor1.style.backgroundColor = "rgb(146, 238, 146)";
+            cor2.style.backgroundColor = "#EFEFEF";
+            cor3.style.backgroundColor = "red";
+            cor4.style.backgroundColor = "red";
+            cor5.style.backgroundColor = "#EFEFEF";
+            cor6.style.backgroundColor = "#EFEFEF";
+            cor7.style.backgroundColor = "#EFEFEF";
+            cor8.style.backgroundColor = "#EFEFEF";
+
+        }
+
+        function mudaCor2(){
+            var cor1 = document.getElementById('btnA1');
+            var cor2 = document.getElementById('btnA2');
+            var cor3 = document.getElementById('btnA3');
+            var cor4 = document.getElementById('btnA4');
+            var cor5 = document.getElementById('btnA5');
+            var cor6 = document.getElementById('btnA6');
+            var cor7 = document.getElementById('btnA7');
+            var cor8 = document.getElementById('btnA8');
+            cor1.style.backgroundColor = "#EFEFEF";
+            cor2.style.backgroundColor = "rgb(146, 238, 146)";
+            cor3.style.backgroundColor = "red";
+            cor4.style.backgroundColor = "red";
+            cor5.style.backgroundColor = "#EFEFEF";
+            cor6.style.backgroundColor = "#EFEFEF";
+            cor7.style.backgroundColor = "#EFEFEF";
+            cor8.style.backgroundColor = "#EFEFEF";
+
+        }
+
+        function mudaCor3(){
+            var cor1 = document.getElementById('btnA1');
+            var cor2 = document.getElementById('btnA2');
+            var cor3 = document.getElementById('btnA3');
+            var cor4 = document.getElementById('btnA4');
+            var cor5 = document.getElementById('btnA5');
+            var cor6 = document.getElementById('btnA6');
+            var cor7 = document.getElementById('btnA7');
+            var cor8 = document.getElementById('btnA8');
+            cor1.style.backgroundColor = "#EFEFEF";
+            cor2.style.backgroundColor = "#EFEFEF";
+            cor3.style.backgroundColor = "red";
+            cor4.style.backgroundColor = "red";
+            cor5.style.backgroundColor = "#EFEFEF";
+            cor6.style.backgroundColor = "#EFEFEF";
+            cor7.style.backgroundColor = "#EFEFEF";
+            cor8.style.backgroundColor = "#EFEFEF";
+
+        }
+
+        function mudaCor4(){
+            var cor1 = document.getElementById('btnA1');
+            var cor2 = document.getElementById('btnA2');
+            var cor3 = document.getElementById('btnA3');
+            var cor4 = document.getElementById('btnA4');
+            var cor5 = document.getElementById('btnA5');
+            var cor6 = document.getElementById('btnA6');
+            var cor7 = document.getElementById('btnA7');
+            var cor8 = document.getElementById('btnA8');
+            cor1.style.backgroundColor = "#EFEFEF";
+            cor2.style.backgroundColor = "#EFEFEF";
+            cor3.style.backgroundColor = "red";
+            cor4.style.backgroundColor = "red";
+            cor5.style.backgroundColor = "#EFEFEF";
+            cor6.style.backgroundColor = "#EFEFEF";
+            cor7.style.backgroundColor = "#EFEFEF";
+            cor8.style.backgroundColor = "#EFEFEF";
+
+        }
+
+        function mudaCor5(){
+            var cor1 = document.getElementById('btnA1');
+            var cor2 = document.getElementById('btnA2');
+            var cor3 = document.getElementById('btnA3');
+            var cor4 = document.getElementById('btnA4');
+            var cor5 = document.getElementById('btnA5');
+            var cor6 = document.getElementById('btnA6');
+            var cor7 = document.getElementById('btnA7');
+            var cor8 = document.getElementById('btnA8');
+            cor1.style.backgroundColor = "#EFEFEF";
+            cor2.style.backgroundColor = "#EFEFEF";
+            cor3.style.backgroundColor = "red";
+            cor4.style.backgroundColor = "red";
+            cor5.style.backgroundColor = "rgb(146, 238, 146)";
+            cor6.style.backgroundColor = "#EFEFEF";
+            cor7.style.backgroundColor = "#EFEFEF";
+            cor8.style.backgroundColor = "#EFEFEF";
+
+        }
+
+        function mudaCor6(){
+            var cor1 = document.getElementById('btnA1');
+            var cor2 = document.getElementById('btnA2');
+            var cor3 = document.getElementById('btnA3');
+            var cor4 = document.getElementById('btnA4');
+            var cor5 = document.getElementById('btnA5');
+            var cor6 = document.getElementById('btnA6');
+            var cor7 = document.getElementById('btnA7');
+            var cor8 = document.getElementById('btnA8');
+            cor1.style.backgroundColor = "#EFEFEF";
+            cor2.style.backgroundColor = "#EFEFEF";
+            cor3.style.backgroundColor = "red";
+            cor4.style.backgroundColor = "red";
+            cor5.style.backgroundColor = "#EFEFEF";
+            cor6.style.backgroundColor = "rgb(146, 238, 146)";
+            cor7.style.backgroundColor = "#EFEFEF";
+            cor8.style.backgroundColor = "#EFEFEF";
+
+        }
+
+        function mudaCor7(){
+            var cor1 = document.getElementById('btnA1');
+            var cor2 = document.getElementById('btnA2');
+            var cor3 = document.getElementById('btnA3');
+            var cor4 = document.getElementById('btnA4');
+            var cor5 = document.getElementById('btnA5');
+            var cor6 = document.getElementById('btnA6');
+            var cor7 = document.getElementById('btnA7');
+            var cor8 = document.getElementById('btnA8');
+            cor1.style.backgroundColor = "#EFEFEF";
+            cor2.style.backgroundColor = "#EFEFEF";
+            cor3.style.backgroundColor = "red";
+            cor4.style.backgroundColor = "red";
+            cor5.style.backgroundColor = "#EFEFEF";
+            cor6.style.backgroundColor = "#EFEFEF";
+            cor7.style.backgroundColor = "rgb(146, 238, 146)";
+            cor8.style.backgroundColor = "#EFEFEF";
+
+        }
+
+        function mudaCor8(){
+            var cor1 = document.getElementById('btnA1');
+            var cor2 = document.getElementById('btnA2');
+            var cor3 = document.getElementById('btnA3');
+            var cor4 = document.getElementById('btnA4');
+            var cor5 = document.getElementById('btnA5');
+            var cor6 = document.getElementById('btnA6');
+            var cor7 = document.getElementById('btnA7');
+            var cor8 = document.getElementById('btnA8');
+            cor1.style.backgroundColor = "#EFEFEF";
+            cor2.style.backgroundColor = "#EFEFEF";
+            cor3.style.backgroundColor = "red";
+            cor4.style.backgroundColor = "red";
+            cor5.style.backgroundColor = "#EFEFEF";
+            cor6.style.backgroundColor = "#EFEFEF";
+            cor7.style.backgroundColor = "#EFEFEF";
+            cor8.style.backgroundColor = "rgb(146, 238, 146)";
+
+        }
+
+
+        function fun2(){
+
+            var nSF = document.getElementById("nSF");
+            var interr = document.getElementById("interr");
+            var infr = document.getElementById("infr");
+            var nAI = document.getElementById("nAI");
+            var flsAI = document.getElementById("flsAI");
+            var prazo = document.getElementById("prazo");
+            var extrato = document.getElementById("extrato");
+            var dtPagMult = document.getElementById("dtPagMult");
+            var tranJulg = document.getElementById("tranJulg");
+            var cidade = document.getElementById("cidade");
+            var func = document.getElementById("func");
+            var cargo = document.getElementById("cargo");
+            var reg = document.getElementById("reg");
+            var unid = document.getElementById("unid");
+            var funcGestor = document.getElementById("funcGestor");
+            var cargoGestor = document.getElementById("cargoGestor");
+            var regGestor = document.getElementById("regGestor");
+            var unidGestor = document.getElementById("unidGestor");
+            var ofiCreadoc = document.getElementById("ofiCreadoc");
+            var iniciais = document.getElementById("iniciais");
+            var limpar = document.getElementById("limpar");
+            var gerar = document.getElementById("gerar");
+            var dividi = document.getElementById("dividi");
+        
+
+            var dataAI = document.getElementById("dataAI");
+            var flsDef = document.getElementById("flsDef");
+            var flsInform = document.getElementById("flsInform");
+            var camara = document.getElementById("camara");
+
+            dataAI.style.display = "none";
+            flsDef.style.display = "none";
+            flsInform.style.display = "none";
+            camara.style.display = "none";
+            
+            nSF.style.display = "block";
+            interr.style.display = "block";
+            infr.style.display = "block";
+            nAI.style.display = "block";
+            flsAI.style.display = "block";
+            prazo.style.display = "block";
+            extrato.style.display = "block";
+            dtPagMult.style.display = "block";
+            tranJulg.style.display = "block";
+            cidade.style.display = "block";
+            func.style.display = "block";
+            cargo.style.display = "block";
+            reg.style.display = "block";
+            unid.style.display = "block";
+            funcGestor.style.display = "block";
+            cargoGestor.style.display = "block";
+            regGestor.style.display = "block";
+            unidGestor.style.display = "block";
+            ofiCreadoc.style.display = "block";
+            iniciais.style.display = "block";
+            limpar.style.display = "block";
+            gerar.style.display = "block";
+            dividi.style.display = "block";
+        
+            
+            
+            /* função do botão gerar */
+            var element = document.getElementById('gerar');
+            element.onclick = function () { 
+            
+            var  nSFvalor2 = document.getElementById('nSF').value;
+            nSFspan102.innerHTML = nSFvalor2;
+            nSFspan1022.innerHTML = nSFvalor2;
+            nSFspan1023.innerHTML = nSFvalor2;
+            nSFspan1024.innerHTML = nSFvalor2;
+
+            var  interrvalor2 = document.getElementById('interr').value;
+            interrspan102.innerHTML = interrvalor2;
+            interrspan1022.innerHTML = interrvalor2;
+            interrspan1023.innerHTML = interrvalor2;
+
+            var  infrvalor2 = document.getElementById('infr').value;
+            infrspan102.innerHTML = infrvalor2;
+            infrspan1022.innerHTML = infrvalor2;
+            infrspan1023.innerHTML = infrvalor2;
+
+            var  nAIvalor2 = document.getElementById('nAI').value;
+            nAIspan102.innerHTML = nAIvalor2;
+            nAIspan1022.innerHTML = nAIvalor2;
+            nAIspan1023.innerHTML = nAIvalor2;
+
+            var  flsAIvalor2 = document.getElementById('flsAI').value;
+            flsAIspan102.innerHTML = flsAIvalor2;
+            
+
+            var  prazovalor2 = document.getElementById('prazo').value;
+            prazospan102.innerHTML = prazovalor2;
+                        
+
+            var  extratovalor2 = document.getElementById('extrato').value;
+            extratospan102.innerHTML = extratovalor2;
+            
+
+            var  cidadevalor2 = document.getElementById('cidade').value;
+            cidadespan102.innerHTML = cidadevalor2;
+            cidadespan1022.innerHTML = cidadevalor2;
+            cidadespan1023.innerHTML = cidadevalor2;
+            cidadespan1024.innerHTML = cidadevalor2;
+
+            var  funcvalor2 = document.getElementById('func').value;
+            funcspan102.innerHTML = funcvalor2;
+
+            var  cargovalor2 = document.getElementById('cargo').value;
+            cargospan102.innerHTML = cargovalor2;
+
+            var  regvalor2 = document.getElementById('reg').value;
+            regspan102.innerHTML = regvalor2;
+
+            var  unidvalor2 = document.getElementById('unid').value;
+            unidspan102.innerHTML = unidvalor2;
+            unidspan1022.innerHTML = unidvalor2;
+
+            var  funcGestorvalor2 = document.getElementById('funcGestor').value;
+            funcGestorspan102.innerHTML = funcGestorvalor2;
+            funcGestorspan1022.innerHTML = funcGestorvalor2;
+            funcGestorspan1023.innerHTML = funcGestorvalor2;
+
+            var  cargoGestorvalor2 = document.getElementById('cargoGestor').value;
+            cargoGestorspan102.innerHTML = cargoGestorvalor2;
+            cargoGestorspan1022.innerHTML = cargoGestorvalor2;
+            cargoGestorspan1023.innerHTML = cargoGestorvalor2;
+
+            var  regGestorvalor2 = document.getElementById('regGestor').value;
+            regGestorspan102.innerHTML = regGestorvalor2;
+            regGestorspan1022.innerHTML = regGestorvalor2;
+            regGestorspan1023.innerHTML = regGestorvalor2;
+
+            var  unidGestorvalor2 = document.getElementById('unidGestor').value;
+            unidGestorspan102.innerHTML = unidGestorvalor2;
+            unidGestorspan1022.innerHTML = unidGestorvalor2;
+            unidGestorspan1023.innerHTML = unidGestorvalor2;
+
+            var  dtPagMultvalor2 = document.getElementById('dtPagMult').value;
+            dtPagMultspan102.innerHTML = dtPagMultvalor2;
+
+            var  tranJulgvalor2 = document.getElementById('tranJulg').value;
+            tranJulgspan102.innerHTML = tranJulgvalor2;
+            tranJulgspan1022.innerHTML = tranJulgvalor2;
+
+            var  ofiCreadocvalor2 = document.getElementById('ofiCreadoc').value;
+            ofiCreadocspan102.innerHTML = ofiCreadocvalor2;
+            
+            var  iniciaisvalor2 = document.getElementById('iniciais').value;
+            iniciaisspan102.innerHTML = iniciaisvalor2;
+
+            printDiv2();
+            
+            };
+            /* aqui termina a função do botão gerar */
+            
+            mudaCor2();
+        }
+
+        function fun5(){
+
+            var nSF = document.getElementById("nSF");
+            var interr = document.getElementById("interr");
+            var infr = document.getElementById("infr");
+            var nAI = document.getElementById("nAI");
+            var flsAI = document.getElementById("flsAI");
+            var extrato = document.getElementById("extrato");
+            var prazo = document.getElementById("prazo");           //não uso 
+            var dtPagMult = document.getElementById("dtPagMult");   //não uso
+            var tranJulg = document.getElementById("tranJulg");     //não uso
+            var cidade = document.getElementById("cidade");
+            var func = document.getElementById("func");
+            var cargo = document.getElementById("cargo");
+            var reg = document.getElementById("reg");
+            var unid = document.getElementById("unid");
+            var funcGestor = document.getElementById("funcGestor");
+            var cargoGestor = document.getElementById("cargoGestor");
+            var regGestor = document.getElementById("regGestor");
+            var unidGestor = document.getElementById("unidGestor");
+            var ofiCreadoc = document.getElementById("ofiCreadoc");     //não uso
+            var iniciais = document.getElementById("iniciais");         //não uso
+            var limpar = document.getElementById("limpar");
+            var gerar = document.getElementById("gerar");
+            var dividi = document.getElementById("dividi");
+            var dataAI = document.getElementById("dataAI");
+            var flsDef = document.getElementById("flsDef");
+            var flsInform = document.getElementById("flsInform");
+            var camara = document.getElementById("camara");
+
+            dataAI.style.display = "block";
+            flsDef.style.display = "block";
+            flsInform.style.display = "block";
+            camara.style.display = "block";
+            nSF.style.display = "block";
+            interr.style.display = "block";
+            infr.style.display = "block";
+            nAI.style.display = "block";
+            flsAI.style.display = "block";
+            extrato.style.display = "block";
+            prazo.style.display = "none";            
+            dtPagMult.style.display = "none";
+            tranJulg.style.display = "none";
+            cidade.style.display = "block";
+            func.style.display = "block";
+            cargo.style.display = "block";
+            reg.style.display = "block";
+            unid.style.display = "block";
+            funcGestor.style.display = "block";
+            cargoGestor.style.display = "block";
+            regGestor.style.display = "block";
+            unidGestor.style.display = "block"; 
+            ofiCreadoc.style.display = "none";
+            iniciais.style.display = "none";
+            limpar.style.display = "block";
+            gerar.style.display = "block";
+            dividi.style.display = "block";
+
+            /* função do botão gerar */
+            var element = document.getElementById('gerar');
+            element.onclick = function () { 
+
+            var  nSFvalor5 = document.getElementById('nSF').value;
+            nSFspan502.innerHTML = nSFvalor5;
+            nSFspan5022.innerHTML = nSFvalor5;
+
+
+            var  interrvalor5 = document.getElementById('interr').value;
+            interrspan502.innerHTML = interrvalor5;
+            interrspan5022.innerHTML = interrvalor5;
+            
+
+            var  infrvalor5 = document.getElementById('infr').value;
+            infrspan502.innerHTML = infrvalor5;
+            infrspan5022.innerHTML = infrvalor5;
+
+            var  flsDef5valor5 = document.getElementById('flsDef').value;
+            flsDef5span502.innerHTML = flsDef5valor5;
+            flsDef5span5022.innerHTML = flsDef5valor5;  
+
+            var  flsInform5valor = document.getElementById('flsInform').value;
+            flsInformspan502.innerHTML = flsInform5valor; 
+
+            var  dataAIvalor5 = document.getElementById('dataAI').value;
+            dataAIvalor502.innerHTML = dataAIvalor5;
+
+            var  camaravalor5 = document.getElementById('camara').value;
+            camaravalorSpan502.innerHTML = camaravalor5;
+            
+
+            var  nAIvalor5 = document.getElementById('nAI').value;
+            nAIspan502.innerHTML = nAIvalor5;
+
+
+            var  flsAIvalor5 = document.getElementById('flsAI').value;
+            flsAIspan502.innerHTML = flsAIvalor5;
+
+            var  extratovalor5 = document.getElementById('extrato').value;
+            extratospan502.innerHTML = extratovalor5;
+
+
+            var  cidadevalor5 = document.getElementById('cidade').value;
+            cidadespan502.innerHTML = cidadevalor5;
+            cidadespan5022.innerHTML = cidadevalor5;
+
+
+            var  funcvalor5 = document.getElementById('func').value;
+            funcspan502.innerHTML = funcvalor5;
+
+            var  cargovalor5 = document.getElementById('cargo').value;
+            cargospan502.innerHTML = cargovalor5;
+
+            var  regvalor5 = document.getElementById('reg').value;
+            regspan502.innerHTML = regvalor5;
+
+            var  unidvalor5 = document.getElementById('unid').value;
+            unidspan502.innerHTML = unidvalor5;
+            
+
+            var  funcGestorvalor5 = document.getElementById('funcGestor').value;
+            funcGestorspan502.innerHTML = funcGestorvalor5;
+
+
+            var  cargoGestorvalor5 = document.getElementById('cargoGestor').value;
+            cargoGestorspan502.innerHTML = cargoGestorvalor5;
+
+
+            var  regGestorvalor5 = document.getElementById('regGestor').value;
+            regGestorspan502.innerHTML = regGestorvalor5;
+
+
+            var  unidGestorvalor5 = document.getElementById('unidGestor').value;
+            unidGestorspan502.innerHTML = unidGestorvalor5;
+
+
+
+            printDiv5();
+
+            };
+            /* aqui termina a função do botão gerar */
+
+            mudaCor5();
+            }
+
+        function fun6(){
+
+            var nSF = document.getElementById("nSF");
+            var interr = document.getElementById("interr");
+            var infr = document.getElementById("infr");
+            var nAI = document.getElementById("nAI");
+            var flsAI = document.getElementById("flsAI");
+            var extrato = document.getElementById("extrato");
+            var prazo = document.getElementById("prazo");           //não uso 
+            var dtPagMult = document.getElementById("dtPagMult");   //não uso
+            var tranJulg = document.getElementById("tranJulg");     //não uso
+            var cidade = document.getElementById("cidade");
+            var func = document.getElementById("func");
+            var cargo = document.getElementById("cargo");
+            var reg = document.getElementById("reg");
+            var unid = document.getElementById("unid");
+            var funcGestor = document.getElementById("funcGestor");
+            var cargoGestor = document.getElementById("cargoGestor");
+            var regGestor = document.getElementById("regGestor");
+            var unidGestor = document.getElementById("unidGestor");
+            var ofiCreadoc = document.getElementById("ofiCreadoc");     //não uso
+            var iniciais = document.getElementById("iniciais");         //não uso
+            var limpar = document.getElementById("limpar");
+            var gerar = document.getElementById("gerar");
+            var dividi = document.getElementById("dividi");
+            var dataAI = document.getElementById("dataAI");
+            var flsDef = document.getElementById("flsDef");
+            var flsInform = document.getElementById("flsInform");
+            var camara = document.getElementById("camara");
+
+            dataAI.style.display = "block";
+            flsDef.style.display = "block";
+            flsInform.style.display = "block";
+            camara.style.display = "block";
+            nSF.style.display = "block";
+            interr.style.display = "block";
+            infr.style.display = "block";
+            nAI.style.display = "block";
+            flsAI.style.display = "block";
+            extrato.style.display = "block";
+            prazo.style.display = "none";            
+            dtPagMult.style.display = "none";
+            tranJulg.style.display = "none";
+            cidade.style.display = "block";
+            func.style.display = "block";
+            cargo.style.display = "block";
+            reg.style.display = "block";
+            unid.style.display = "block";
+            funcGestor.style.display = "block";
+            cargoGestor.style.display = "block";
+            regGestor.style.display = "block";
+            unidGestor.style.display = "block"; 
+            ofiCreadoc.style.display = "none";
+            iniciais.style.display = "none";
+            limpar.style.display = "block";
+            gerar.style.display = "block";
+            dividi.style.display = "block";
+
+            /* função do botão gerar */
+            var element = document.getElementById('gerar');
+            element.onclick = function () { 
+
+            var  nSFvalor6 = document.getElementById('nSF').value;
+            nSFspan602.innerHTML = nSFvalor6;
+            nSFspan6022.innerHTML = nSFvalor6;
+
+
+            var  interrvalor6 = document.getElementById('interr').value;
+            interrspan602.innerHTML = interrvalor6;
+            interrspan6022.innerHTML = interrvalor6;
+
+
+            var  infrvalor6 = document.getElementById('infr').value;
+            infrspan602.innerHTML = infrvalor6;
+            infrspan6022.innerHTML = infrvalor6;
+
+            var  flsDef5valor6 = document.getElementById('flsDef').value;
+            flsDef5span602.innerHTML = flsDef5valor6;
+            flsDef5span6022.innerHTML = flsDef5valor6;  
+
+            var  flsInform5valor6 = document.getElementById('flsInform').value;
+            flsInformspan602.innerHTML = flsInform5valor6; 
+
+            var  dataAIvalor6 = document.getElementById('dataAI').value;
+            dataAIvalor602.innerHTML = dataAIvalor6;
+
+            var  camaravalor6 = document.getElementById('camara').value;
+            camaravalorSpan602.innerHTML = camaravalor6;
+
+
+            var  nAIvalor6 = document.getElementById('nAI').value;
+            nAIspan602.innerHTML = nAIvalor6;
+
+
+            var  flsAIvalor6 = document.getElementById('flsAI').value;
+            flsAIspan602.innerHTML = flsAIvalor6;
+
+            var  extratovalor6 = document.getElementById('extrato').value;
+            extratospan602.innerHTML = extratovalor6;
+
+
+            var  cidadevalor6 = document.getElementById('cidade').value;
+            cidadespan602.innerHTML = cidadevalor6;
+            cidadespan6022.innerHTML = cidadevalor6;
+
+
+            var  funcvalor6 = document.getElementById('func').value;
+            funcspan602.innerHTML = funcvalor6;
+
+            var  cargovalor6 = document.getElementById('cargo').value;
+            cargospan602.innerHTML = cargovalor6;
+
+            var  regvalor6 = document.getElementById('reg').value;
+            regspan602.innerHTML = regvalor6;
+
+            var  unidvalor6 = document.getElementById('unid').value;
+            unidspan602.innerHTML = unidvalor6;
+
+
+            var  funcGestorvalor6 = document.getElementById('funcGestor').value;
+            funcGestorspan602.innerHTML = funcGestorvalor6;
+
+
+            var  cargoGestorvalor6 = document.getElementById('cargoGestor').value;
+            cargoGestorspan602.innerHTML = cargoGestorvalor6;
+
+
+            var  regGestorvalor6 = document.getElementById('regGestor').value;
+            regGestorspan602.innerHTML = regGestorvalor6;
+
+
+            var  unidGestorvalor6 = document.getElementById('unidGestor').value;
+            unidGestorspan602.innerHTML = unidGestorvalor6;
+
+
+
+            printDiv6();
+
+            };
+            /* aqui termina a função do botão gerar */
+
+            mudaCor6();
+            }
+
+        function fun7(){
+
+            var nSF = document.getElementById("nSF");
+            var interr = document.getElementById("interr");
+            var infr = document.getElementById("infr");
+            var nAI = document.getElementById("nAI");
+            var flsAI = document.getElementById("flsAI");
+            var extrato = document.getElementById("extrato");
+            var prazo = document.getElementById("prazo");           //não uso 
+            var dtPagMult = document.getElementById("dtPagMult");   //não uso
+            var tranJulg = document.getElementById("tranJulg");     //não uso
+            var cidade = document.getElementById("cidade");
+            var func = document.getElementById("func");
+            var cargo = document.getElementById("cargo");
+            var reg = document.getElementById("reg");
+            var unid = document.getElementById("unid");
+            var funcGestor = document.getElementById("funcGestor");
+            var cargoGestor = document.getElementById("cargoGestor");
+            var regGestor = document.getElementById("regGestor");
+            var unidGestor = document.getElementById("unidGestor");
+            var ofiCreadoc = document.getElementById("ofiCreadoc");     //não uso
+            var iniciais = document.getElementById("iniciais");         //não uso
+            var limpar = document.getElementById("limpar");
+            var gerar = document.getElementById("gerar");
+            var dividi = document.getElementById("dividi");
+            var dataAI = document.getElementById("dataAI");
+            var flsDef = document.getElementById("flsDef");
+            var flsInform = document.getElementById("flsInform");
+            var camara = document.getElementById("camara");
+
+            dataAI.style.display = "block";
+            flsDef.style.display = "block";
+            flsInform.style.display = "block";
+            camara.style.display = "block";
+            nSF.style.display = "block";
+            interr.style.display = "block";
+            infr.style.display = "block";
+            nAI.style.display = "block";
+            flsAI.style.display = "block";
+            extrato.style.display = "block";
+            prazo.style.display = "none";            
+            dtPagMult.style.display = "none";
+            tranJulg.style.display = "none";
+            cidade.style.display = "block";
+            func.style.display = "block";
+            cargo.style.display = "block";
+            reg.style.display = "block";
+            unid.style.display = "block";
+            funcGestor.style.display = "block";
+            cargoGestor.style.display = "block";
+            regGestor.style.display = "block";
+            unidGestor.style.display = "block"; 
+            ofiCreadoc.style.display = "none";
+            iniciais.style.display = "none";
+            limpar.style.display = "block";
+            gerar.style.display = "block";
+            dividi.style.display = "block";
+
+            /* função do botão gerar */
+            var element = document.getElementById('gerar');
+            element.onclick = function () { 
+
+            var  nSFvalor7 = document.getElementById('nSF').value;
+            nSFspan702.innerHTML = nSFvalor7;
+            nSFspan7022.innerHTML = nSFvalor7;
+
+
+            var  interrvalor7 = document.getElementById('interr').value;
+            interrspan702.innerHTML = interrvalor7;
+            interrspan7022.innerHTML = interrvalor7;
+
+
+            var  infrvalor7 = document.getElementById('infr').value;
+            infrspan702.innerHTML = infrvalor7;
+            infrspan7022.innerHTML = infrvalor7;
+
+            var  flsDef5valor7 = document.getElementById('flsDef').value;
+            flsDef5span702.innerHTML = flsDef5valor7;
+            flsDef5span7022.innerHTML = flsDef5valor7;  
+
+            var  flsInform5valor7 = document.getElementById('flsInform').value;
+            flsInformspan702.innerHTML = flsInform5valor7; 
+
+            var  dataAIvalor7 = document.getElementById('dataAI').value;
+            dataAIvalor702.innerHTML = dataAIvalor7;
+
+            var  camaravalor7 = document.getElementById('camara').value;
+            camaravalorSpan702.innerHTML = camaravalor7;
+
+
+            var  nAIvalor7 = document.getElementById('nAI').value;
+            nAIspan702.innerHTML = nAIvalor7;
+
+
+            var  flsAIvalor7 = document.getElementById('flsAI').value;
+            flsAIspan702.innerHTML = flsAIvalor7;
+
+            var  extratovalor7 = document.getElementById('extrato').value;
+            extratospan702.innerHTML = extratovalor7;
+
+
+            var  cidadevalor7 = document.getElementById('cidade').value;
+            cidadespan702.innerHTML = cidadevalor7;
+            cidadespan7022.innerHTML = cidadevalor7;
+
+
+            var  funcvalor7 = document.getElementById('func').value;
+            funcspan702.innerHTML = funcvalor7;
+
+            var  cargovalor7 = document.getElementById('cargo').value;
+            cargospan702.innerHTML = cargovalor7;
+
+            var  regvalor7 = document.getElementById('reg').value;
+            regspan702.innerHTML = regvalor7;
+
+            var  unidvalor7 = document.getElementById('unid').value;
+            unidspan702.innerHTML = unidvalor7;
+
+
+            var  funcGestorvalor7 = document.getElementById('funcGestor').value;
+            funcGestorspan702.innerHTML = funcGestorvalor7;
+
+
+            var  cargoGestorvalor7 = document.getElementById('cargoGestor').value;
+            cargoGestorspan702.innerHTML = cargoGestorvalor7;
+
+
+            var  regGestorvalor7 = document.getElementById('regGestor').value;
+            regGestorspan702.innerHTML = regGestorvalor7;
+
+
+            var  unidGestorvalor7 = document.getElementById('unidGestor').value;
+            unidGestorspan702.innerHTML = unidGestorvalor7;
+
+
+
+            printDiv7();
+
+            };
+            /* aqui termina a função do botão gerar */
+
+            mudaCor7();
+        }
+
+        function fun8(){
+
+            var nSF = document.getElementById("nSF");
+            var interr = document.getElementById("interr");
+            var infr = document.getElementById("infr");
+            var nAI = document.getElementById("nAI");
+            var flsAI = document.getElementById("flsAI");
+            var extrato = document.getElementById("extrato");
+            var prazo = document.getElementById("prazo");           //não uso 
+            var dtPagMult = document.getElementById("dtPagMult");   //não uso
+            var tranJulg = document.getElementById("tranJulg");     //não uso
+            var cidade = document.getElementById("cidade");
+            var func = document.getElementById("func");
+            var cargo = document.getElementById("cargo");
+            var reg = document.getElementById("reg");
+            var unid = document.getElementById("unid");
+            var funcGestor = document.getElementById("funcGestor");
+            var cargoGestor = document.getElementById("cargoGestor");
+            var regGestor = document.getElementById("regGestor");
+            var unidGestor = document.getElementById("unidGestor");
+            var ofiCreadoc = document.getElementById("ofiCreadoc");     //não uso
+            var iniciais = document.getElementById("iniciais");         //não uso
+            var limpar = document.getElementById("limpar");
+            var gerar = document.getElementById("gerar");
+            var dividi = document.getElementById("dividi");
+            var dataAI = document.getElementById("dataAI");
+            var flsDef = document.getElementById("flsDef");
+            var flsInform = document.getElementById("flsInform");
+            var camara = document.getElementById("camara");
+
+            dataAI.style.display = "block";
+            flsDef.style.display = "block";
+            flsInform.style.display = "block";
+            camara.style.display = "block";
+            nSF.style.display = "block";
+            interr.style.display = "block";
+            infr.style.display = "block";
+            nAI.style.display = "block";
+            flsAI.style.display = "block";
+            extrato.style.display = "block";
+            prazo.style.display = "none";            
+            dtPagMult.style.display = "none";
+            tranJulg.style.display = "none";
+            cidade.style.display = "block";
+            func.style.display = "block";
+            cargo.style.display = "block";
+            reg.style.display = "block";
+            unid.style.display = "block";
+            funcGestor.style.display = "block";
+            cargoGestor.style.display = "block";
+            regGestor.style.display = "block";
+            unidGestor.style.display = "block"; 
+            ofiCreadoc.style.display = "none";
+            iniciais.style.display = "none";
+            limpar.style.display = "block";
+            gerar.style.display = "block";
+            dividi.style.display = "block";
+
+            /* função do botão gerar */
+            var element = document.getElementById('gerar');
+            element.onclick = function () { 
+
+            var  nSFvalor8 = document.getElementById('nSF').value;
+            nSFspan802.innerHTML = nSFvalor8;
+            nSFspan8022.innerHTML = nSFvalor8;
+
+
+            var  interrvalor8 = document.getElementById('interr').value;
+            interrspan802.innerHTML = interrvalor8;
+            interrspan8022.innerHTML = interrvalor8;
+
+
+            var  infrvalor8 = document.getElementById('infr').value;
+            infrspan802.innerHTML = infrvalor8;
+            infrspan8022.innerHTML = infrvalor8;
+
+            var  flsDef5valor8 = document.getElementById('flsDef').value;
+            flsDef5span702.innerHTML = flsDef5valor8;
+            flsDef5span8022.innerHTML = flsDef5valor8;  
+
+            var  flsInform5valor8 = document.getElementById('flsInform').value;
+            flsInformspan802.innerHTML = flsInform5valor8; 
+
+            var  dataAIvalor8 = document.getElementById('dataAI').value;
+            dataAIvalor802.innerHTML = dataAIvalor8;
+
+            var  camaravalor8 = document.getElementById('camara').value;
+            camaravalorSpan802.innerHTML = camaravalor8;
+
+
+            var  nAIvalor8 = document.getElementById('nAI').value;
+            nAIspan802.innerHTML = nAIvalor8;
+
+
+            var  flsAIvalor8 = document.getElementById('flsAI').value;
+            flsAIspan802.innerHTML = flsAIvalor8;
+
+            var  extratovalor8 = document.getElementById('extrato').value;
+            extratospan802.innerHTML = extratovalor8;
+
+
+            var  cidadevalor8 = document.getElementById('cidade').value;
+            cidadespan802.innerHTML = cidadevalor8;
+            cidadespan8022.innerHTML = cidadevalor8;
+
+
+            var  funcvalor8 = document.getElementById('func').value;
+            funcspan802.innerHTML = funcvalor8;
+
+            var  cargovalor8 = document.getElementById('cargo').value;
+            cargospan802.innerHTML = cargovalor8;
+
+            var  regvalor8 = document.getElementById('reg').value;
+            regspan802.innerHTML = regvalor8;
+
+            var  unidvalor8 = document.getElementById('unid').value;
+            unidspan802.innerHTML = unidvalor8;
+
+
+            var  funcGestorvalor8 = document.getElementById('funcGestor').value;
+            funcGestorspan802.innerHTML = funcGestorvalor8;
+
+
+            var  cargoGestorvalor8 = document.getElementById('cargoGestor').value;
+            cargoGestorspan802.innerHTML = cargoGestorvalor8;
+
+
+            var  regGestorvalor8 = document.getElementById('regGestor').value;
+            regGestorspan802.innerHTML = regGestorvalor8;
+
+
+            var  unidGestorvalor8 = document.getElementById('unidGestor').value;
+            unidGestorspan802.innerHTML = unidGestorvalor8;
+
+
+
+            printDiv8();
+
+            };
+            /* aqui termina a função do botão gerar */
+
+            mudaCor8();
+        }
+
+
+
+     </script>
+
+</body>
+</html>
